@@ -1,0 +1,97 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}    % needed for including graphics e.g. EPS, PS
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage[round]{natbib}
+\usepackage{multirow}
+\bibliographystyle{abbrvnat}
+\usepackage{hyperref}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{bm}
+\newcommand{\bs}{\ensuremath{\boldsymbol}}
+\newcommand{\mb}{\ensuremath{\mathbf}}
+\newcommand{\mbE}{\ensuremath{\mbox{E}}}
+\newcommand{\rhoy}{\ensuremath{\rho_{ij} (y, \mb{X}_i )}}
+\newcommand{\rhoyo}{\ensuremath{\rho_{ij} (y_0, \mb{X}_i )}}
+\newcommand{\tauy}{\ensuremath{\tau_{ij} (y, \mb{X}_{ij} )}}
+\newcommand{\tauyo}{\ensuremath{\tau_{ij} (y_0, \mb{X}_{ij} )}}
+\newcommand{\rhoyobs}{\ensuremath{\rho_{ij} (y, \mb{X}_{ij} )}}
+\newcommand{\rhoyoobs}{\ensuremath{\rho_{ij} (y_0, \mb{X}_{ij} )}}
+\newcommand{\odds}{\ensuremath{\mbox{odds}_S}}
+\newcommand{\prob}{\ensuremath{\mbox{Pr}}}
+\newcommand{\pione}{\ensuremath{\pi(1, \mb{X}_{1i})}}
+\newcommand{\pizero}{\ensuremath{\pi(0, \mb{X}_{1i})}}
+\newcommand{\psione}{\ensuremath{\psi(1, \mb{X}_{1,ij})}}
+\newcommand{\psizero}{\ensuremath{\psi(0, X_{1,ij})}}
+\newcommand{\pioneobs}{\ensuremath{\pi(1, \mb{X}_{1,ij})}}
+\newcommand{\pizeroobs}{\ensuremath{\pi(0, \mb{X}_{1,ij})}}
+\newcommand{\sumofsubj}{\ensuremath{\sum_{i} \sum_{j}}}
+\newcommand{\lamy}{\ensuremath{\lambda_{P_{ij}}(y, \mb{X}_i)}}
+\newcommand{\lamyo}{\ensuremath{\lambda_{P_{ij}}(y_0, \mb{X}_i)}}
+\newcommand{\lamyobs}{\ensuremath{\lambda_{P_{ij}}(y, \mb{X}_{ij})}}
+\newcommand{\lamyoobs}{\ensuremath{\lambda_{P_{ij}}(y_0, \mb{X}_{ij})}}
+\newcommand{\wone}{\ensuremath{\mb{w}_{1,ij}}}
+\newcommand{\wtwo}{\ensuremath{\mb{w}_{2,ij}}}
+\newcommand{\ti}{\ensuremath{\mb{T}_i(\bs{\gamma})}}
+\newcommand{\ui}{\ensuremath{\mb{U}_i(\bs{\gamma}, \bs{\beta})}}
+\def\ci{\perp\!\!\!\perp}
+\parskip 7.2pt           % sets spacing between paragraphs
+\parindent 0pt		     % sets leading space for paragraphs
+%\textwidth 6in
+\usepackage{setspace}
+\doublespace
+\begin{document}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{| c c c c c c  |} \hline
+Estimation & $\beta_0 = .75$ & $\beta_{x_1} = .5$ & $\beta_{x_2} = .75 $ & $\beta_t =.1$ & $\beta_{t x_{1}} = .025$  \\ \hline
+Naive      &    24             (0)       &   -10            (73)       &      1             (93)       &   -38             (0)       &    21            (91) \\
+Corrected     &     0            (95)       &    -2            (94)       &      0             (94)       &    -1            (93)       &   -10            (93) \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{| c c c c c c  |} \hline
+Estimation & $\beta_0 = .75$ & $\beta_{x_1} = .5$ & $\beta_{x_2} = .75 $ & $\beta_t =.1$ & $\beta_{t x_{1}} = .025$  \\ \hline
+Naive      &    42             (2)       &     6            (95)       &     3            (93)       &   -70             (8)       &    -33             (94) \\
+Corrected     &     1            (94)       &     0            (94)       &     0            (94)       &    -2            (95)       &     -4             (94) \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{| l |  r r |  r r  |} \hline
+& \multicolumn{2}{c|}{Corrected}   & \multicolumn{2}{|c|}{Naive}  \\ \hline
+Intercept     & $  1.01 $ & $(  0.80  ,  1.22  )$ & $  1.39 $ &  $(  1.20    , 1.59  )$ \\
+$t$           & $  0.06 $ & $( -0.03  ,  0.14  )$ & $ -0.02 $ &  $( -0.10    , 0.05  )$ \\
+$(t-2)_+$     & $ -0.12 $ & $( -0.22  , -0.03  )$ & $ -0.05 $ &  $( -0.13    , 0.03  )$ \\
+age           & $ -0.14 $ & $( -0.29  ,  0.01  )$ & $ -0.14 $ &  $( -0.29    , 0.00  )$ \\
+sex           & $ -0.48 $ & $( -0.89  , -0.07  )$ & $ -0.22 $ &  $( -0.63    , 0.20  )$ \\
+afr           & $  0.51 $ & $(  0.26  ,  0.75  )$ & $  0.46 $ &  $(  0.22    , 0.71  )$ \\
+other         & $  0.03 $ & $( -0.55  ,  0.61  )$ & $  0.10 $ &  $( -0.47    , 0.67  )$ \\
+sex*$t$       & $  0.07 $ & $( -0.16  ,  0.30  )$ & $  0.04 $ &  $( -0.17    , 0.25  )$ \\
+sex*$(t-2)_+$ & $ -0.12 $ & $( -0.38  ,  0.14  )$ & $ -0.09 $ &  $( -0.34    , 0.15  )$ \\ \hline
+\end{tabular} 
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{| l |  r r |  r r  |} \hline
+& \multicolumn{2}{c|}{Corrected}   & \multicolumn{2}{|c|}{Naive}  \\ \hline
+Intercept & $  1.02 $ & $(  0.82  ,  1.23  )$ & $  1.42 $ &  $(  1.23    ,  1.42  )$ \\
+$t$       & $  0.07 $ & $( -0.02  ,  0.15  )$ & $ -0.02 $ &  $( -0.09    , -0.02  )$ \\
+$(t-2)_+$ & $ -0.14 $ & $( -0.24  , -0.05  )$ & $ -0.06 $ &  $( -0.14    , -0.06  )$ \\
+age       & $ -0.15 $ & $( -0.29  ,  0.00  )$ & $ -0.16 $ &  $( -0.30    , -0.16  )$ \\
+sex       & $ -0.60 $ & $( -0.99  , -0.22  )$ & $ -0.41 $ &  $( -0.80    , -0.41  )$ \\
+afr       & $  0.52 $ & $(  0.28  ,  0.76  )$ & $  0.48 $ &  $(  0.23    ,  0.48  )$ \\
+other     & $  0.01 $ & $( -0.58  ,  0.60  )$ & $  0.09 $ &  $( -0.48    ,  0.09  )$  \\ \hline
+\end{tabular} 
+\end{table}
+
+\end{document}
