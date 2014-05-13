@@ -199,11 +199,17 @@ class: gray
 In the population:
 </div>
 $$
-\mbox{Pr}(Z=1|Y\_j, X) = \lambda\_{P\_j} (y, X) = \mbox{logit}^{-1} \left\\{w\_{1j}'\gamma\_1 + h(y) w\_{2j}' \gamma\_2 \right\\}
+\begin{aligned}
+\mbox{Pr}(Z=1|Y\_j, X) = & \lambda\_{P\_j} (y, X) \\\
+= & \mbox{logit}^{-1} \left\\{w\_{1j}'\gamma\_1 + h(y) w\_{2j}' \gamma\_2 \right\\}
+\end{aligned}
 $$
 In the sample:
 $$
-\mbox{Pr}(Z=1|Y\_j, X, S) = \lambda\_{S\_j} (y, X) = \mbox{logit}^{-1} \left\\{ w\_{1j}'\gamma\_1 + h(y) w\_{2j}' \gamma\_2 + \log\pi(1)/\pi(0)\right\\}
+\begin{aligned}
+\mbox{Pr}(Z=1|Y\_j, X, S) = & \lambda\_{S\_j} (y, X) \\\
+= &\mbox{logit}^{-1} \left\\{ w\_{1j}'\gamma\_1 + h(y) w\_{2j}' \gamma\_2 + \log\pi(1)/\pi(0)\right\\}
+\end{aligned}
 $$
 
 # Compute $\mbox{Pr}(S | Y\_j , X)$
