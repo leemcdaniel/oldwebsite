@@ -165,7 +165,7 @@ Allows three modeling steps
 
 1. Estimate $\mbox{Pr}(Z=1|Y\_j, X)$ from sample, for each $t\_j$
 2. Compute $\mbox{Pr}(S=1|Y\_j,X)$, for each $t\_j$
-3. Estimate $\mbox{E}(Y\_j | X)$ from sample
+3. Estimate $\mbox{E}(Y\_j | X, S=1)$ 
 </div>
 
 ---
@@ -203,7 +203,7 @@ $$
 
 class: gray, big
 
-# Estimate $\mbox{E}(Y\_j | X)$
+# Estimate $\mbox{E}(Y\_j | X, S=1)$
 
 <div style="position:relative; left:0px">
 In the population, conditional density is <b>exponential family</b>:
