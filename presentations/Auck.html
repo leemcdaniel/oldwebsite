@@ -102,10 +102,6 @@ class: center, middle
 
 #### University of Wisconsin, Madison
 
-???
-* Thank you for having me
-* Talking about longitudinal data when sampling is related to the outcome
-* Only talking about the case when sampling is at the subject level
 
 ---
 
@@ -116,20 +112,16 @@ class: gray, big
 * Goal: Identify risk and prognostic factors for ADHD early
 * Sampling: 255 subjects, about half cases/controls
 
+<div style="position:relative; left:50px">
 Cases: Referred by parent or teacher
 
 Controls: Matched demographically
+</div>
 
 * Followed up for 15 years (I have 8)
 * <b>Analyze</b> time course of hyperactivity symptom count
 
-???
 
-* Young children, about 5 years old
-* Referral correlated
-* Not a physician diagnosis
-* Look at hyperactivity, apparent time trend
-* time and intercept can be biased
 ---
 
 class: gray, big
@@ -153,10 +145,6 @@ $$
 
 * $Z = 1$ means referred
 * $S = 1$ means sampled
-???
-
-* mu equation means some function of the mean is linear in covariates
-* we assume that covariates a times other than j have information about E(Y|X)
 
 ---
 
@@ -179,16 +167,6 @@ Allows three modeling steps
 2. Compute $\mbox{Pr}(S=1|Y\_j,X)$, for each $t\_j$
 3. Estimate $\mbox{E}(Y\_j | X)$ from sample
 </div>
-
-???
-
-* We assume known value for the ratio of prob sampled given referred over prob sampled given not-referred
-* Assume sampling is conditionally independent of response and covariates given referral status
-* We can have some stratification
-* First estimate prob referred given outcome at each time point and covariates
-* Then compute prob sampled given outcome at each time point and covariates
-* Unintuitive, but the conditional probability exists and can be modeled
-* Then finally estimate the marginal model we're interested in from the sampled data
 
 ---
 
@@ -220,14 +198,6 @@ $$
 \rho\_j (y, X) = \pi(0) \left\\{1 - \lambda\_{P\_j}(y, X) \right\\} + \pi(1)\lambda\_{P\_j}(y, X) 
 $$
 
-???
-
-* In the population model, we have a logistic regression model
-* the w's are some covariates, possibly a subset of the covariates in X
-* include these covariates and interactions with the response
-* Response can be some non-identity function
-* Then we look at the ratio of prob of being sampled given y to prob of being sampled given y_0
-* rho ratio doesn't involve beta
 
 ---
 
@@ -250,13 +220,6 @@ $$
 f\_{S} (y | X) \propto  \exp \left\\{ \frac{\theta\_j y - b(\theta\_j) }{\phi} + c(y; \phi) + \log\rho\_j(y, X)  \right\\}
 $$
 
-???
-
-* In the population, we assume an exponential family distribution
-* we estimate the coefficients in beta using a canonical link function
-* Still end up with an exponential family distribution
-* rho ratio doesn't involve coefficients
-* From here: get link and variance in sample
 
 ---
 
@@ -279,13 +242,6 @@ Continuous data:
 </div>
 </center>
 
-???
-
-* 2000 replicates
-* x1 and x2 time-invariant and binary
-* Bias is mostly corrected, coverage probability is vastly improved
-* In continuous data, estimate dispersion parameter
-* extra variability from this estimation doesn't throw off SE estimation
 
 ---
 
@@ -298,11 +254,7 @@ Response is hyperactivity symptom count
 </div>
 </center>
 
-???
 
-* After correction, we see a different time trend
-* also now the gender is related to the hyperactivity count
-* This is as we expect, boys are more hyperactive
 
     </textarea>
     <script src="js/remark-0.6.0.min.js" type="text/javascript">
