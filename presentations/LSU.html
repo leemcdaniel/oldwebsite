@@ -723,7 +723,39 @@ $$n = \frac{z\_\beta^2 d + z\_\alpha^2 \\left\\{ d + \delta E(X) (1-2p) \\right\
 
 ---
 
+class: gray, big
 
+# Imaginary Sample Size
+
+When is 
+$$
+d < \delta E(X) ?
+$$
+
+$d$ is small
+
+$$
+\begin{aligned}
+d & \approx \int \lambda e^{-\lambda t} G(t) dt < \int \lambda e^{-\lambda t}dt \\\
+& = 1-e^{\lambda \tau} \approx \lambda \tau \approx \lambda E(X)
+\end{aligned}
+$$
+
+So, (very) approximately,
+$$
+\lambda(t) < \delta
+$$
+
+???
+
+* if d small, approx expo
+* less than because G(t) < 1
+* tau is trial length
+* exponential CDF
+* taylor approx
+* d small, E(X) near tau
+
+---
 
 class: gray, big
 
@@ -778,8 +810,10 @@ $$
 
 ???
 
-- d leads to higher sample size in add, lower in prop
-- prop doesn't depend on E(X)
+- trade off between sample size and trial length
+- Depends on baseline hazard
+- if hazard decreasing, longer follow up in add
+- reverse in prop
 
 ---
 
@@ -822,7 +856,7 @@ $$\delta > 0.132\%$$
 # SPORTIF: Any Bad Event
 
 <div style="float:left; width:475px">
-<img  width="475px"  src="LSU/Figs//anybadhaz.jpg" />
+<img  width="475px"  src="LSU/Figs/anybadhaz.jpg" />
 </div>
 
 <div style="float:right;" width="100px">
