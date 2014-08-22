@@ -43,10 +43,10 @@
 	  
 	  a:link {
     	color: #FFFFFF;
-    	text-decoration:none;
+    	text-decoration:underline;
 	}
 	
-	a.dark:link {color:#000000;text-decoration:none;}
+	a.dark:link {color:#000000;text-decoration:underline;}
 	a.dark:visited {color:#000000;text-decoration:none;}
 
 /* visited link */
@@ -124,6 +124,448 @@ class: center, middle, gray
 * Accomplished from additive hazards perspective
 
 ---
+
+
+
+class: image
+
+# Consequences of Analysis
+
+<center><img  width="550px"  src="Figs/errorsim.jpg" /></center>
+
+???
+
+- Only way to calculate sample size in a NI trial with additive margin is w/ parametric assumptions
+- Analyzing using exponential assumption can cause major problems
+- Reduced power, inflated type 1 error
+- Both are unacceptable
+- Shape parameter < 1 -> decreasing hazard
+- Shape > 1 -> increasing hazard
+
+---
+
+class: center, middle, gray, big
+
+<center><b>We want to design clinical trials based on a hazard difference without distributions.</b></center>
+
+---
+
+class: gray, big
+
+# Additive Hazards
+
+Aalen's original model
+$$
+\lambda\_i(t) = \lambda\_0(t) + \gamma(t)' \mathbf{Z}\_i (t)
+$$
+
+Lin and Ying model
+$$
+\lambda\_i(t) = \lambda\_0(t) + \gamma' \mathbf{Z}\_i (t)
+$$
+
+Treatment indicator: $Z_i = 1$
+
+$$
+\lambda_i (t) = \lambda\_0(t) + \gamma Z\_i
+$$
+
+So model reduces to
+
+$$
+\lambda\_{E}(t) - \lambda\_{C}(t) = \gamma
+$$
+
+???
+
+- First we require the same effect size over time
+- It may be useful to relax this
+- Some treatments only kick in after months
+- Remove possibility of switching treatment status
+- lambda_A is hazard for control group
+
+---
+
+
+class: center, middle, gray, big
+
+<a href="#31"><h1> Non-Inferiority Sample Size</h1></a>
+
+---
+
+
+
+
+class: gray, big
+
+# Non-inferiority Setup
+
+Test:
+$$
+\begin{aligned}
+H\_0 : \lambda\_{E} - \lambda\_{C} \geq \delta \\\
+H\_1 : \lambda\_{E} - \lambda\_{C} < \delta
+\end{aligned}
+$$
+
+Define
+<div style="position:relative; left:50px">
+
+* $T$ = failure time
+* $C$ = censoring time
+* $X = \min(T,C)$
+</div>
+
+---
+
+
+class: gray, big
+
+# Assumptions
+
+
+<div style="position:relative; left:50px">
+
+
+* Subjects are independent <br><br>
+* Constant hazard difference <br><br>
+* Assignment to $E$ completely random w.p. <i>p</i> <br><br>
+* Independent censoring <br><br>
+* Censoring distribution common (surv. function = $G(t)$) <br><br>
+* Alternative is equivalence
+</div>
+
+---
+
+
+
+
+class: gray
+
+<a href="#40"><h1>NI Sample Size</h1></a>
+<!--
+<div class="math" style="position:relative; top:200px">
+	<i>n</i> = 
+	<div class="fraction-inline">
+		<span class="numerator">
+		<i>z</i><sub>&beta;</sub><sup>2</sup><i>d</i> + <i>z</i><sub>&alpha;</sub><sup>2</sup>(<i>d</i> + &delta;E(<i>X</i>)(1 &ndash; 2<i>p</i>))
+		 + 2<i>z</i><sub>&alpha;</sub><i>z</i><sub>&beta;</sub><span class="radic2">&radic;</span><span class="root"><i>d</i></span>
+		<span class="radic2">&radic;</span><span class="root"><i>d</i> + &delta;E(<i>X</i>)(1 &ndash; 2<i>p</i>)</span>
+				</span>
+		<span class="divider">_________</span>
+		<span class="denominator"><i>p</i>(1 &ndash; <i>p</i>)&delta;<sup>2</sup>E(<i>X</i>)<sup>2</sup></span>
+	</div>
+</div>
+-->
+
+<div style="position:relative; top:125px">
+$$n = \frac{z\_\beta^2 d + z\_\alpha^2 \\left\\{ d + \delta E(X) (1-2p) \\right\\} + 2z\_\alpha z\_\beta \\sqrt{d} \\sqrt{d + \delta E(X)(1-2p)}}{p(1-p)\delta^2 E(X)^2}$$
+</div>
+
+---
+
+class: gray, big
+
+# Imaginary Sample Size
+
+When is 
+$$
+d < \delta E(X) ?
+$$
+
+$d$ is small
+
+$$
+\begin{aligned}
+d & \approx \int \lambda e^{-\lambda t} G(t) dt < \int \lambda e^{-\lambda t}dt \\\
+& = 1-e^{-\lambda \tau} \approx \lambda \tau \approx \lambda E(X)
+\end{aligned}
+$$
+
+So, (very) approximately,
+$$
+\lambda(t) < \delta
+$$
+---
+
+class: gray, big
+
+# Equal Allocation
+<!--
+<div class="math" style="position:relative; top:200px">
+	<i>n</i> = 
+	<div class="fraction-inline">
+		<span class="numerator">(<i>z</i><sub>&alpha;</sub> + <i>z</i><sub>&beta;</sub>)<sup>2</sup><i>d</i></span>
+		<span class="divider">_________</span>
+		<span class="denominator"><i>p</i>(1 &ndash; <i>p</i>)&gamma;<sup>2</sup>E(<i>X</i>)<sup>2</sup></span>
+	</div>
+</div>
+-->
+<div style="position:relative; top:125px">
+$$ n = \frac{(z\_\alpha + z\_\beta)^2 d}{p(1-p)\delta^2 E(X)^2}$$
+</div>
+---
+
+class: image
+
+# Simulations
+
+<center><img  width="550px"  src="Figs/powersim.jpg" /></center>
+---
+
+
+
+class: gray, big
+
+# Comparison to Logrank
+<div style="position:relative; top:120px">
+$$
+n = \frac{4(z\_\alpha + z\_\beta)^2 d}{\delta^2 E(X)^2} \quad \mbox{vs.} \quad n = \frac{4(z\_\alpha + z\_\beta)^2 }{d\log\Delta^2}
+$$
+</div>
+
+???
+
+- d leads to higher sample size in add, lower in prop
+- prop doesn't depend on E(X)
+
+---
+
+
+
+
+
+<center>
+<iframe style="width:750px; height:600px" src="samplesize.html" frameborder="0"></iframe>
+</center>
+
+---
+
+class: gray, big, center, middle
+
+# Goodness of Fit
+
+---
+
+class: gray, big
+
+# Hypotheses
+Test proportionality:
+$$
+\begin{aligned}
+H_0 : & \lambda_B(t) =\Delta \lambda_A(t) \\\
+H_1 : & \lambda_B(t) = \Delta \lambda_A(t) + \gamma
+\end{aligned}
+$$
+
+Test additivity:
+$$
+\begin{aligned}
+H_0 : & \lambda_B(t) = \lambda_A(t) + \gamma\\\
+H_1 : & \lambda_B(t) = \Delta \lambda_A(t) + \gamma
+\end{aligned}
+$$
+
+
+---
+
+class: gray, big
+
+# Proportional Null
+
+<div style="position:relative; top:100px">
+
+Fit the model:
+$$
+\lambda_B(t) = \lambda_A(t) e^{\beta_1 + \beta_2 K(t)}
+$$
+
+If $\beta_2 \neq 0$, reject proportional hazards.
+</div>
+
+---
+
+class: gray, big
+
+# Proportional Null
+
+If true model is
+$$
+\lambda_A(t) = \lambda_B(t) + \gamma
+$$
+
+Then most powerful choice is
+$$
+K(t) = \lambda_A(t)^{-1}
+$$
+
+Estimate $\lambda_A(t)$ with smoothed least squares estimate.
+
+---
+
+class: gray, big
+
+# Additive Null
+
+In
+$$
+\lambda_B(t) =  \lambda_A(t)e^{\beta_1 + \beta_2 \lambda_A(t)^{-1}}
+$$
+
+if $\beta_1 = 0$, then
+$$
+\begin{aligned}
+\lambda_B(t) \approx &\lambda_A(t) (1 + \beta_2 \lambda_A(t) ^{-1} ) \\\
+ = &\lambda_A(t) + \beta_2
+\end{aligned}
+$$
+
+So under additive null, $\beta_1 = 0$.
+
+---
+
+class: gray, big
+
+# Considerations
+
+<div style="position:relative; top:75px">
+
+* Proportional null: hazard weighting shows little to no improvement <br><br>
+* Type 1 error conserved with proportional null <br><br>
+* Additive null: use baseline to conserve type I error <br><br>
+* May need to threshold hazard weighting <br><br>
+
+</div>
+
+---
+
+
+class: gray, big, center, middle
+
+<a href="#44"><h1>Analysis</h1></a>
+
+---
+
+# SPORTIF: Primary Endpoint
+
+<div style="float:left; width:475px">
+<img  width="475px"  src="Figs/primaryhazsplit.jpg" />
+</div>
+
+<div style="float:right;" width="100px">
+Exponential analysis: <br>
+ reject inferiority for
+$$\delta > 0.127\%$$
+<br>
+Additive analysis: <br>
+ reject inferiority for
+$$\delta > 0.132\%$$
+<div>
+
+???
+
+- low event rate
+- wide confidence intervals
+- not much difference
+- original margin was 2%
+
+---
+
+# SPORTIF: Any Bad Event
+
+<div style="float:left; width:475px">
+<img  width="475px"  src="Figs/anybadsplit.jpg" />
+</div>
+
+<div style="float:right;" width="100px">
+Exponential analysis: <br>
+ reject inferiority for
+$$\delta > -0.905\%$$
+<br>
+Additive analysis: <br>
+ reject inferiority for
+$$\delta > -0.585\%$$
+<div>
+
+???
+
+- somewhat confusing interepretation
+- 0.4% difference
+- 20% of original margin
+
+---
+
+class: gray, big
+
+# Future Work
+
+<div style="position:relative; top:75px">
+
+* Non-equal alternative <br><br>
+* Efficiency issues <br><br>
+* Mixed null hypothesis <br><br>
+* Testing hazard model and type I error
+
+</div>
+
+---
+
+class: gray, big, center, middle
+
+# Extra Slides
+
+---
+
+class: gray
+
+# Motivation - SPORTIF III
+
+* Non-inferiority trial with margin as <b>hazard difference</b> <br><br>
+* Warfarin vs. ximelagatran <br><br>
+* Exponential distribution assumed <br> <br>
+* Low primary event rate (stroke, systemic embolic event, death), about 3% per year 
+
+
+
+### What if endpoint had included bleeding?
+
+* 35% per year event rate <br><br>
+* Cannot appeal to exponentiality <br><br>
+* (At least not if hazard rate is non-constant)
+
+???
+
+About Warfarin/downsides
+
+- Warfarin used to prevent stroke after atrial fibrillation
+- Invented in WI, because of dead cows
+- Warfarin requires dose adjustment, ximelegatran would not
+- Avoid spinach on Warfarin
+
+About bleeding
+
+- Bleeding is very common
+- Minor bleeding may be giant bruises on arms
+- Drug taken for decades
+
+ximelegatran was abandoned due to liver toxicity
+
+---
+
+class: image
+
+# Estimated Hazard
+
+<center><img  width="525px"  src="Figs/anybadsplit.jpg" /></center>
+
+???
+
+- Decreasing hazard function, definitely not constant.
+- Estimated using muhaz package
+- Kernel smoothing of Nelson-Aalen estimates
+
+---
+
 class: gray, big
 
 # Non-inferiority Trials
@@ -234,484 +676,12 @@ class: gray, big
 
 ---
 
-class: gray
-
-# Motivation - SPORTIF III
-
-* Non-inferiority trial with margin as <b>hazard difference</b> <br><br>
-* Warfarin vs. ximelagatran <br><br>
-* Exponential distribution assumed <br> <br>
-* Low primary event rate (stroke, systemic embolic event, death), about 3% per year 
-
-
-
-### What if endpoint had included bleeding?
-
-* 35% per year event rate <br><br>
-* Cannot appeal to exponentiality <br><br>
-* (At least not if hazard rate is non-constant)
-
-???
-
-About Warfarin/downsides
-
-- Warfarin used to prevent stroke after atrial fibrillation
-- Invented in WI, because of dead cows
-- Warfarin requires dose adjustment, ximelegatran would not
-- Avoid spinach on Warfarin
-
-About bleeding
-
-- Bleeding is very common
-- Minor bleeding may be giant bruises on arms
-- Drug taken for decades
-
-ximelegatran was abandoned due to liver toxicity
-
----
-
-class: image
-
-# Estimated Hazard
-
-<center><img  width="525px"  src="Figs/anybadsplit.jpg" /></center>
-
-???
-
-- Decreasing hazard function, definitely not constant.
-- Estimated using muhaz package
-- Kernel smoothing of Nelson-Aalen estimates
-
----
-
-class: image
-
-# Consequences of Analysis
-
-<center><img  width="550px"  src="Figs/errorsim.jpg" /></center>
-
-???
-
-- Only way to calculate sample size in a NI trial with additive margin is w/ parametric assumptions
-- Analyzing using exponential assumption can cause major problems
-- Reduced power, inflated type 1 error
-- Both are unacceptable
-- Shape parameter < 1 -> decreasing hazard
-- Shape > 1 -> increasing hazard
-
----
-
-class: center, middle, gray, big
-
-<center><b>We want to design clinical trials based on a hazard difference without distributions.</b></center>
-
----
-
-class: gray, big
-
-# Additive Hazards
-
-Aalen's original model
-$$
-\lambda\_i(t) = \lambda\_0(t) + \gamma(t)' \mathbf{Z}\_i (t)
-$$
-
-Lin and Ying model
-$$
-\lambda\_i(t) = \lambda\_0(t) + \gamma' \mathbf{Z}\_i (t)
-$$
-
-Treatment indicator: $Z_i = 1$
-
-$$
-\lambda_i (t) = \lambda\_0(t) + \gamma Z\_i
-$$
-
-So model reduces to
-
-$$
-\lambda\_{E}(t) - \lambda\_{C}(t) = \gamma
-$$
-
-???
-
-- First we require the same effect size over time
-- It may be useful to relax this
-- Some treatments only kick in after months
-- Remove possibility of switching treatment status
-- lambda_A is hazard for control group
-
----
-
-
-
-class: gray, big
-
-
-# Notation
-
-- $N\_i (t)$ = 1 if $i$ has had event by time $t$, 0 otherwise <br><br>
-- $Y\_i (t)$ = 1 if $i$ at risk at time $t-$, 0 otherwise <br><br>
-- $N\_i(t)$, $Y\_i(t)$ adapted to $\mathcal{F}\_t$ <br><br>
-- $N\_{E}(t) = \sum\_i N\_i(t) Z\_i$ <br><br>
-- $Y\_{E} (t) = \sum\_i Y\_i(t) Z\_i$  <br><br>
-- $M\_{E} (t) = N\_{E} (t) - \int\_0^t Y\_{E}(u) d\Lambda\_{E}(u)$ <br><br>
-- $\bar{Z}(t) = Y\_{E}(t) / Y(t)$
-
-???
-
-- Go through notation
-- Do it slowly
-- Y is at risk just up until time t
-- So Y is predictable
-- at risk means didn't have an event, not censored
-
-
----
-
-class: gray, big
-
-# Estimation
-
-<div style="position:relative; top:50px">
-Estimate $\gamma$ by
-
-$$
-U(\gamma) = \sum\_i \int \left\\{ Z\_i - \bar{Z}(t) \right\\} \left\\{ dN\_i (t) - \gamma Z\_i Y\_i(t) dt \right\\} = 0
-$$
-$$
-\Downarrow
-$$
-$$
-U(\gamma) = \int \left\\{ 1- \bar{Z}(t) \right\\} dM\_{E}(t) - \int \bar{Z}(t) dM\_{C}(t) = 0
-$$
-
-</div>
-
-???
-
-* Lin and Ying propose this equation to estimate gamma
-* Consistent, no reason to believe it's efficient
-* Efficiency depends on weighting by the baseline hazard function
-* Using the simplifying assumptions from the trial, we get this convenient form
-
----
-
-
-class: center, middle, gray, big
-
-<a href="#32"><h1> Non-Inferiority Sample Size</h1></a>
-
----
-
-
-
-
-class: gray, big
-
-# Non-inferiority Setup
-
-Test:
-$$
-\begin{aligned}
-H\_0 : \lambda\_{E} - \lambda\_{C} \geq \delta \\\
-H\_1 : \lambda\_{E} - \lambda\_{C} < \delta
-\end{aligned}
-$$
-
-Define
-<div style="position:relative; left:50px">
-
-* $T$ = failure time
-* $C$ = censoring time
-* $X = \min(T,C)$
-</div>
-
----
-
-
-class: gray, big
-
-# Assumptions
-
-
-<div style="position:relative; left:50px">
-
-
-* Subjects are independent <br><br>
-* Constant hazard difference <br><br>
-* Assignment to $E$ completely random w.p. <i>p</i> <br><br>
-* Independent censoring <br><br>
-* Censoring distribution common (surv. function = $G(t)$) <br><br>
-* Alternative is equivalence
-</div>
-
----
-
-
-
-
-class: gray
-
-<a href="#39"><h1>NI Sample Size</h1></a>
-<!--
-<div class="math" style="position:relative; top:200px">
-	<i>n</i> = 
-	<div class="fraction-inline">
-		<span class="numerator">
-		<i>z</i><sub>&beta;</sub><sup>2</sup><i>d</i> + <i>z</i><sub>&alpha;</sub><sup>2</sup>(<i>d</i> + &delta;E(<i>X</i>)(1 &ndash; 2<i>p</i>))
-		 + 2<i>z</i><sub>&alpha;</sub><i>z</i><sub>&beta;</sub><span class="radic2">&radic;</span><span class="root"><i>d</i></span>
-		<span class="radic2">&radic;</span><span class="root"><i>d</i> + &delta;E(<i>X</i>)(1 &ndash; 2<i>p</i>)</span>
-				</span>
-		<span class="divider">_________</span>
-		<span class="denominator"><i>p</i>(1 &ndash; <i>p</i>)&delta;<sup>2</sup>E(<i>X</i>)<sup>2</sup></span>
-	</div>
-</div>
--->
-
-<div style="position:relative; top:125px">
-$$n = \frac{z\_\beta^2 d + z\_\alpha^2 \\left\\{ d + \delta E(X) (1-2p) \\right\\} + 2z\_\alpha z\_\beta \\sqrt{d} \\sqrt{d + \delta E(X)(1-2p)}}{p(1-p)\delta^2 E(X)^2}$$
-</div>
-
----
-
-class: gray, big
-
-# Imaginary Sample Size
-
-When is 
-$$
-d < \delta E(X) ?
-$$
-
-$d$ is small
-
-$$
-\begin{aligned}
-d & \approx \int \lambda e^{-\lambda t} G(t) dt < \int \lambda e^{-\lambda t}dt \\\
-& = 1-e^{\lambda \tau} \approx \lambda \tau \approx \lambda E(X)
-\end{aligned}
-$$
-
-So, (very) approximately,
-$$
-\lambda(t) < \delta
-$$
----
-
-class: gray, big
-
-# Equal Allocation
-<!--
-<div class="math" style="position:relative; top:200px">
-	<i>n</i> = 
-	<div class="fraction-inline">
-		<span class="numerator">(<i>z</i><sub>&alpha;</sub> + <i>z</i><sub>&beta;</sub>)<sup>2</sup><i>d</i></span>
-		<span class="divider">_________</span>
-		<span class="denominator"><i>p</i>(1 &ndash; <i>p</i>)&gamma;<sup>2</sup>E(<i>X</i>)<sup>2</sup></span>
-	</div>
-</div>
--->
-<div style="position:relative; top:125px">
-$$ n = \frac{(z\_\alpha + z\_\beta)^2 d}{p(1-p)\delta^2 E(X)^2}$$
-</div>
----
-
-class: image
-
-# Simulations
-
-<center><img  width="550px"  src="Figs/powersim.jpg" /></center>
----
-
-
-
-class: gray, big
-
-# Comparison to Logrank
-<div style="position:relative; top:120px">
-$$
-n = \frac{4(z\_\alpha + z\_\beta)^2 d}{\delta^2 E(X)^2} \quad \mbox{vs.} \quad n = \frac{4(z\_\alpha + z\_\beta)^2 }{d\log\Delta^2}
-$$
-</div>
-
-???
-
-- d leads to higher sample size in add, lower in prop
-- prop doesn't depend on E(X)
-
----
-
-
-
-
-
-<center>
-<iframe style="width:750px; height:600px" src="samplesize.html" frameborder="0"></iframe>
-</center>
-
----
-
-class: gray, big, center, middle
-
-# Goodness of Fit
-
----
-
-class: gray, big
-
-# Hypotheses
-Test proportionality:
-$$
-\begin{aligned}
-H_0 : & \lambda_B(t) =\Delta \lambda_A(t) \\\
-H_1 : & \lambda_B(t) = \Delta \lambda_A(t) + \gamma
-\end{aligned}
-$$
-
-Test additivity:
-$$
-\begin{aligned}
-H_0 : & \lambda_B(t) = \lambda_A(t) + \gamma\\\
-H_1 : & \lambda_B(t) = \Delta \lambda_A(t) + \gamma
-\end{aligned}
-$$
-
-
----
-
-class: gray, big
-
-# Proportional Null
-
-<div style="position:relative; top:125px">
-
-Fit the model:
-$$
-\lambda_B(t) = \lambda_A(t) e^{\beta_1 + \beta_2 K(t)}
-$$
-
-If $\beta_2 \neq 0$, reject proportional hazards.
-</div>
-
----
-
-class: gray, big
-
-# Proportional Null
-
-If true model is
-$$
-\lambda_A(t) = \lambda_B(t) + \gamma
-$$
-
-Then most powerful choice is
-$$
-K(t) = \lambda_A(t)^{-1}
-$$
-
-Estimate $\lambda_A(t)$ with smoothed least squares estimate.
-
----
-
-class: gray, big
-
-# Additive Null
-
-In
-$$
-\lambda_B(t) =  \lambda_A(t)e^{\beta_1 + \beta_2 \lambda_A(t)^{-1}}
-$$
-
-if $\beta_1 = 0$, then
-$$
-\begin{aligned}
-\lambda_B(t) \approx &\lambda_A(t) (1 + \beta_2 \lambda_A(t) ^{-1} ) \\\
- = &\lambda_A(t) + \beta_2
-\end{aligned}
-$$
-
-So under additive null, $\beta_1 = 0$
-
----
-
-class: gray, big
-
-# Considerations
-* Proportional null: hazard weighting shows little to no improvement <br><br>
-* Type 1 error conserved with proportional null <br><br>
-* Additive null: use baseline to conserve type I error <br><br>
-* May need to threshold hazard weighting <br><br>
-
----
-
-
-class: gray, big, center, middle
-
-<a href="#43"><h1>Analysis</h1></a>
-
----
-
-# SPORTIF: Primary Endpoint
-
-<div style="float:left; width:475px">
-<img  width="475px"  src="Figs/primaryhazsplit.jpg" />
-</div>
-
-<div style="float:right;" width="100px">
-Exponential analysis: <br>
- reject inferiority for
-$$\delta > 0.127\%$$
-<br>
-Additive analysis: <br>
- reject inferiority for
-$$\delta > 0.132\%$$
-<div>
-
-???
-
-- low event rate
-- wide confidence intervals
-- not much difference
-- original margin was 2%
-
----
-
-# SPORTIF: Any Bad Event
-
-<div style="float:left; width:475px">
-<img  width="475px"  src="Figs/anybadsplit.jpg" />
-</div>
-
-<div style="float:right;" width="100px">
-Exponential analysis: <br>
- reject inferiority for
-$$\delta > -0.905\%$$
-<br>
-Additive analysis: <br>
- reject inferiority for
-$$\delta > -0.585\%$$
-<div>
-
-???
-
-- somewhat confusing interepretation
-- 0.4% difference
-- 20% of original margin
-
----
-
-class: gray, big, center, middle
-
-# Extra Slides
-
----
 
 
 
 class: center, middle, gray, big
 
-<a href="#13"><h1>Superiority Trials</h1></a>
+<a href="#5"><h1>Superiority Trials</h1></a>
 
 ---
 
@@ -769,6 +739,58 @@ $$
 
 ---
 
+
+class: gray, big
+
+
+# Notation
+
+- $N\_i (t)$ = 1 if $i$ has had event by time $t$, 0 otherwise <br><br>
+- $Y\_i (t)$ = 1 if $i$ at risk at time $t-$, 0 otherwise <br><br>
+- $N\_i(t)$, $Y\_i(t)$ adapted to $\mathcal{F}\_t$ <br><br>
+- $N\_{E}(t) = \sum\_i N\_i(t) Z\_i$ <br><br>
+- $Y\_{E} (t) = \sum\_i Y\_i(t) Z\_i$  <br><br>
+- $M\_{E} (t) = N\_{E} (t) - \int\_0^t Y\_{E}(u) d\Lambda\_{E}(u)$ <br><br>
+- $\bar{Z}(t) = Y\_{E}(t) / Y(t)$
+
+???
+
+- Go through notation
+- Do it slowly
+- Y is at risk just up until time t
+- So Y is predictable
+- at risk means didn't have an event, not censored
+
+
+---
+
+class: gray, big
+
+# Estimation
+
+<div style="position:relative; top:50px">
+Estimate $\gamma$ by
+
+$$
+U(\gamma) = \sum\_i \int \left\\{ Z\_i - \bar{Z}(t) \right\\} \left\\{ dN\_i (t) - \gamma Z\_i Y\_i(t) dt \right\\} = 0
+$$
+$$
+\Downarrow
+$$
+$$
+U(\gamma) = \int \left\\{ 1- \bar{Z}(t) \right\\} dM\_{E}(t) - \int \bar{Z}(t) dM\_{C}(t) = 0
+$$
+
+</div>
+
+???
+
+* Lin and Ying propose this equation to estimate gamma
+* Consistent, no reason to believe it's efficient
+* Efficiency depends on weighting by the baseline hazard function
+* Using the simplifying assumptions from the trial, we get this convenient form
+
+---
 
 
 class: gray, big
@@ -906,7 +928,7 @@ $$ n = \frac{(z\_\alpha + z\_\beta)^2 d}{p(1-p)\gamma^2 E(X)^2}$$
 
 class: gray
 
-<a href="#16"><h1>NI Estimating Equation</h1></a>
+<a href="#8"><h1>NI Estimating Equation</h1></a>
 <div style="position:relative; top:75px">
 $$
 U(\delta) = \int { \left\\{ 1- \bar{Z}(t) \right\\} dM\_{E}(t)} -  \int { \bar{Z}(t) dM\_{C}(t)}
@@ -998,7 +1020,7 @@ $$
 
 ---
 
-<a class="dark" href="#28"><h1>CPORT: Mortality</h1></a>
+<a class="dark" href="#20"><h1>CPORT: Mortality</h1></a>
 
 <div style="float:left; width:475px">
 <img  width="475px"  src="Figs/CPORTdeadsplit.jpg" />
@@ -1062,18 +1084,19 @@ MathJax.Hub.Config({
   src="js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <script>
-for (var i=0; i<30 ;i++){
+for (var i=0; i<document.getElementsByClassName("remark-slide-number").length ;i++){
 document.getElementsByClassName("remark-slide-number")[i].hidden = false;
 document.getElementsByClassName("remark-slide-number")[i].style.fontSize = "24px";
 var num = i+1;
 curnum = num.toString();
-document.getElementsByClassName("remark-slide-number")[i].innerHTML = (curnum + "/30");
+document.getElementsByClassName("remark-slide-number")[i].innerHTML = (curnum + "/23");
 
 
 }
 
-for (var i=30; i<document.getElementsByClassName("remark-slide-number").length ;i++){
-document.getElementsByClassName("remark-slide-number")[i].hidden = true;
+
+for (var i=23; i<document.getElementsByClassName("remark-slide-number").length ;i++){
+  document.getElementsByClassName("remark-slide-number")[i].hidden = true;
 }
 
 </script>
