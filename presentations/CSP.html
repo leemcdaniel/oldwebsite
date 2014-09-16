@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+
+
+<html>
+<link rel="stylesheet" href="css/math.css" type="text/css" />
+
+<style type="text/css">
+
+      body {
+        font-family: 'Ariel' 'Baskerville' 'Droid Serif';
+        font-size: 24px;
+        color: #2e2e2e;
+		h1 {font-size:40px};
+
+      }
+      .gray {
+      	background: #2e2e2e;
+      	color: #FFFFFF;
+      }
+      
+      .image {
+      	background: #FFFFFF;
+      	color: #000000;
+		font-size: 18px;
+		h1 {font-size:1px;}
+      }
+      
+      .big{
+      	font-size: 28px;
+		h1 {font-size:40px};
+      }
+      
+      .small {
+      	font-size: 24px;
+		
+      }
+      .code {
+      	font-family:'Courier New'
+      }
+	  
+	  h1 {font-size:40px;}
+	  
+	  a:link {
+    	color: #FFFFFF;
+    	text-decoration:underline;
+	}
+	
+	a.dark:link {color:#000000;text-decoration:underline;}
+	a.dark:visited {color:#000000;text-decoration:none;}
+
+/* visited link */
+	a:visited {
+    	color: #FFFFFF;
+	}
+	  
+	<!--
+	code { color: navy; background-color: transparent; }
+	div.codeblock { font-family: monospace;
+		font-size: medium;
+		color: navy; background-color: transparent;
+		white-space: pre; }
+
+	p.indent{ text-indent: 1cm; }
+	table.support { margin: auto; }
+	.support td, th { 
+		font-family: sans-serif; font-size: small; }
+	.support th { white-space: nowrap;  }
+	.support thead th { text-align: left;  }
+	table.support_legend { margin: auto; }
+	.support_legend td { vertical-align: top; }
+	.support_legend table th { 
+		font-family: sans-serif; font-size: small; }
+	table.browser_notes { margin: auto; }
+	table.browser_notes td, th { vertical-align: top; }
+	table.support td.perf { background-color: #99eeff; }
+	table.support td.good { background-color: #aaff99; }
+	table.support td.bad { background-color: #ff8888; }
+	table.support td.ugly { background-color: silver; }
+	table.support td.read { background-color: #ffffaa; }
+
+	/*** Math formatting test commands ***/
+	/***    fractions ***/
+	table.fractionborder { margin: auto; 
+		display: inline; vertical-align: -100%; }
+	.fractionborder td.numerator{ border-bottom: thin black solid; }
+	/***    fancy characters ***/
+	i.hbar{ position: relative; }
+	.hbar span{ position: absolute; left: 0; bottom: 0.65ex; }
+	i.overstrike{ position: relative; }
+	.overstrike span{ position: absolute; }
+	.overstrike sup{ position: absolute; }
+	.overstrike .up{ top: -0.2ex; left: 0; }
+	.overstrike .hi{ bottom: 0.8ex; left: 0.5ex; }
+
+	table.fraction-fallback { display: inline; }
+	table.fraction-fallback { display: inline-table; }
+	-->
+</style>
+
+
+  <head>
+    <title>Additive Hazards Models in Non-Inferiority Trials</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      /* Slideshow styles */
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, gray
+
+# Sparse Matrix Computation in R with an Application to GEEs
+
+#### Lee S. McDaniel
+
+#### LSUHSC - School of Public Health
+
+???
+
+
+---
+
+class: gray, big
+
+# Motivation - ODS
+
+
+* Goal: Identify risk and prognostic factors for ADHD early
+* Sampling: 255 subjects, about half cases/controls
+
+<div style="position:relative; left:50px">
+Cases: Referred by parent or teacher
+
+Controls: Matched demographically
+</div>
+
+* Followed up for 15 years (we have 8)
+* <b>Analyze</b> time course of hyperactivity symptom count
+
+---
+
+class: gray, big
+
+# Estimation
+
+* Estimate $E(Y | X)$
+* Use GEE to improve efficiency
+* In the population, use canonical link:
+$$
+\mu_P = g^{-1}(X' \beta)
+$$
+* In the sample, relationship is:
+$$
+\mu_S = \int y \times dF_S (y | X)
+$$
+
+
+---
+
+class: gray, big, center, middle
+
+<b> Need to fit GEEs with user-defined link functions. </b>
+
+---
+
+class: gray, big
+
+# Existing GEE Software
+
+<div style="position:relative; top:100px">
+
+* SAS: GENMOD <br><br>
+* Stata: xtgee <br><br>
+* R: gee, geepack, yags
+
+</div>
+
+---
+
+class: gray, big
+
+# What We Want
+
+* An R package <br><br>
+* Solve GEEs w/ user-defined link and variance functions <br><br>
+* Do it quickly <br><br>
+* Easy to modify <br><br>
+* Purely in R without C++ elements
+
+Created geeM package satisfying these criteria
+
+---
+
+class: gray, big
+
+# GEE Computation
+
+$$
+f( y\_{it} ) = \exp  \left\\{ y\_{it}  \theta\_{it}  - a ( \theta\_{it} ) + b(y\_{it}) \right\\},
+$$
+$$
+\theta\_{it} = h (\eta\_{it}), \mbox{ } \eta\_{it} = x\_{it} \beta
+$$
+
+Estimate $\beta$ by solving
+$$
+\sum\_{i=1}^{K} D\_i^T V\_i^{-1} S\_i = 0
+$$
+
+Using Newton Method
+$$
+\hat{\beta}\_{j+1} = \hat{\beta}\_{j} - \left\\{ \sum\_{i=1}^{K} D\_i^T V\_i^{-1} D\_i \right\\}^{-1} \left\\{ \sum\_{i=1}^{K} D\_i^T V\_i^{-1} S\_i \right\\}
+$$
+
+---
+
+class: gray, big
+
+# GEE Computation
+
+
+
+---
+
+
+    </textarea>
+    <script src="js/remark-0.6.0.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+   <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+for (var i=0; i<document.getElementsByClassName("remark-slide-number").length ;i++){
+document.getElementsByClassName("remark-slide-number")[i].hidden = false;
+document.getElementsByClassName("remark-slide-number")[i].style.fontSize = "24px";
+var num = i+1;
+curnum = num.toString();
+document.getElementsByClassName("remark-slide-number")[i].innerHTML = (curnum + "/23");
+
+
+}
+
+
+//for (var i=23; i<document.getElementsByClassName("remark-slide-number").length ;i++){
+ // document.getElementsByClassName("remark-slide-number")[i].hidden = true;
+//}
+
+</script>
+  </body>
+</html>
