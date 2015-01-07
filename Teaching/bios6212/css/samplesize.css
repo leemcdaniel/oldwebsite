@@ -1,0 +1,101 @@
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: "optima",sans-serif;
+    font-size: 11px;
+}
+
+.line {
+  fill: none;
+
+  stroke-width: 4px;
+}
+
+
+
+
+.wrapper div {
+    margin: 10px 0;
+    background-color: #FFFFFF;
+}
+
+.wrapper {
+  width: 150px; 
+  margin-left: 0px;
+  margin-right: auto;
+  
+}
+
+
+
+#everything{
+	background-color:#FFFFFF;
+	width: 700px;
+	height:500px;
+	color:black;
+	margin: auto;
+}
+
+
+#topbar {
+	float:left;
+   width:700px;
+   margin-left: 10px;
+   margin-right: 0px;
+}
+#left_col {
+   float:left;
+   width:550px;
+   height:500px;
+}
+#right_col {
+   float:right;
+   width:150px;
+   height:500px;
+   margin-right:10px;
+}
+
+#tooltip{
+        position: absolute;
+        width: auto;
+        height: auto;
+        padding: 3px 1px 3px 1px;
+        background-color: white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+}
+
+#tooltip.hidden {
+        display: none;
+}
+
+#tooltip p {
+        font-family: sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+}
+#warning{
+	display:none;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#type1menu{
+	width:75px;
+	float:left;
+}
+
+#powermenu{
+	width:75px;
+	float:right;
+}
