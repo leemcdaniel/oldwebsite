@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+
+
+<html>
+<link rel="stylesheet" href="css/math.css" type="text/css" />
+
+<style type="text/css">
+
+      body {
+        font-family: 'Ariel' 'Baskerville' 'Droid Serif';
+        font-size: 24px;
+        color: #2e2e2e;
+		h1 {font-size:40px};
+
+      }
+      .gray {
+      	background: #2e2e2e;
+      	color: #FFFFFF;
+      }
+      
+      .image {
+      	background: #FFFFFF;
+      	color: #000000;
+		font-size: 18px;
+		h1 {font-size:1px;}
+      }
+      
+      .big{
+      	font-size: 28px;
+		h1 {font-size:40px};
+      }
+      
+      .small {
+      	font-size: 24px;
+		
+      }
+      .code {
+      	font-family:'Courier New';
+		margin-left: auto;
+		margin-right: auto;
+		font-size: 24px;
+		text-indent: 0px;
+		position:relative;
+		left:100px
+      }
+	  
+	  h1 {font-size:40px;}
+	  
+	  a:link {
+    	color: #FFFFFF;
+    	text-decoration:underline;
+	}
+	
+	
+	
+	
+	a.dark:link {color:#000000;text-decoration:underline;}
+	a.dark:visited {color:#000000;text-decoration:none;}
+
+/* visited link */
+	a:visited {
+    	color: #FFFFFF;
+	}
+	  
+	<!--
+	code { color: navy; background-color: transparent; }
+	div.codeblock { font-family: monospace;
+		font-size: medium;
+		color: navy; background-color: transparent;
+		white-space: pre; }
+
+	p.indent{ text-indent: 1cm; }
+	table.support { margin: auto; }
+	.support td, th { 
+		font-family: sans-serif; font-size: small; }
+	.support th { white-space: nowrap;  }
+	.support thead th { text-align: left;  }
+	table.support_legend { margin: auto; }
+	.support_legend td { vertical-align: top; }
+	.support_legend table th { 
+		font-family: sans-serif; font-size: small; }
+	table.browser_notes { margin: auto; }
+	table.browser_notes td, th { vertical-align: top; }
+	table.support td.perf { background-color: #99eeff; }
+	table.support td.good { background-color: #aaff99; }
+	table.support td.bad { background-color: #ff8888; }
+	table.support td.ugly { background-color: silver; }
+	table.support td.read { background-color: #ffffaa; }
+
+	/*** Math formatting test commands ***/
+	/***    fractions ***/
+	table.fractionborder { margin: auto; 
+		display: inline; vertical-align: -100%; }
+	.fractionborder td.numerator{ border-bottom: thin black solid; }
+	/***    fancy characters ***/
+	i.hbar{ position: relative; }
+	.hbar span{ position: absolute; left: 0; bottom: 0.65ex; }
+	i.overstrike{ position: relative; }
+	.overstrike span{ position: absolute; }
+	.overstrike sup{ position: absolute; }
+	.overstrike .up{ top: -0.2ex; left: 0; }
+	.overstrike .hi{ bottom: 0.8ex; left: 0.5ex; }
+
+	table.fraction-fallback { display: inline; }
+	table.fraction-fallback { display: inline-table; }
+	-->
+</style>
+
+
+  <head>
+    <title>Intro to Survival Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      /* Slideshow styles */
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, gray
+
+# 1) What is a likelihood and how is it constructed?
+
+---
+
+class: center, middle, gray, big
+
+"The likelihood that any parameter (or set of
+parameters) should have any assigned value
+(or set of values) is proportional to the probability
+that if this were so, the totality of
+observations should be that observed."
+
+---
+
+class: center, middle, gray, big
+
+$$
+\mathcal{L}(\theta | x ) \propto P(x | \theta)
+$$
+
+---
+
+class: center, middle, gray, big
+
+Consider $x_1, \ldots, x_n$ iid
+
+$$
+\mathcal{L}(\theta | \mathbf{x} ) \propto \prod_{i=1}^n f(x_i | \theta)
+$$
+
+---
+
+class: center, middle, gray, big
+
+# It's NOT a probability
+
+"We may discuss the probability of occurrence of
+quantities which can be observed . . . in relation
+to any hypotheses which may be suggested to
+explain these observations. We can know nothing
+of the probability of hypotheses . . . [We]
+may ascertain the likelihood of hypotheses . . .
+by calculation from observations: . . . to speak of
+the likelihood . . . of an observable quantity has
+no meaning."
+
+---
+
+class: center, middle, gray, big
+
+# 2) What does a p-value of 0.04 mean?
+
+---
+
+class: center, middle, gray, big
+
+The probability, under the null hypothesis, of seeing data as extreme or more extreme than what we saw is 0.04.
+
+---
+
+class: gray, big
+
+# What is the derivative of $x^2$ wrt $x$
+<div style="position:relative; top:150px">
+$$2x$$
+</div>
+
+---
+
+class: gray, big
+
+# What is the derivative of $e^x$ wrt $x$
+<div style="position:relative; top:150px">
+$$e^x$$
+</div>
+
+---
+
+class: gray, big
+
+# What is $\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$?
+<div style="position:relative; top:150px">
+$$
+1
+$$
+</div>
+
+---
+
+
+class: center, middle, gray
+
+# Survival and Hazard Functions
+
+---
+
+class: image
+# US Life Table
+
+<div style="position:relative; top:25px">
+<center><img src="Figures/HHSlifetable.jpg" width="700"></img></center>
+</div>
+
+---
+
+class: image
+
+# US Survival Functions in 2006
+
+<div style="position:relative; top:25px">
+<center><img src="Figures/HHSsurvival.jpg" width="700"></img></center>
+</div>
+
+---
+class: image
+
+# US Survival Functions in (about) the 20th Century
+
+<div style="position:relative; top:25px">
+<center><img src="Figures/HHScomparative.jpg" width="700"></img></center>
+</div>
+
+---
+
+class: image
+
+# Log-Logistic and Weibull Survival
+
+<div style="position:relative; top:25px">
+<center><img src="Figures/survcurves.jpg" width="500"></img></center>
+</div>
+
+---
+
+class: image
+
+# Log-Logistic and Weibull Hazard
+
+<div style="position:relative; top:25px">
+<center><img src="Figures/hazcurves.jpg" width="500"></img></center>
+</div>
+
+---
+
+class: image
+
+# Dutch Mortality
+
+<div style="position:relative; top:25px">
+<center><img src="Figures/dutchmen.jpg" width="500"></img></center>
+</div>
+
+---
+
+class: image
+
+# UK Mortality (5 parameter model)
+
+<div style="position:relative; top:25px">
+<center><img src="Figures/fiveparam.jpg" width="500"></img></center>
+</div>
+
+---
+
+
+class: image
+
+# UK Mortality (8 parameter model)
+
+<div style="position:relative; top:25px">
+<center><img src="Figures/moreparam.jpg" width="500"></img></center>
+</div>
+
+---
+
+
+class: image
+
+# Dementia and Diabetes
+
+<div style="position:relative; top:25px">
+<center><img src="Figures/chexample.jpg" width="500"></img></center>
+</div>
+
+
+   </textarea>
+    <script src="../js/remark-0.6.0.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+   <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="../js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+for (var i=0; i<document.getElementsByClassName("remark-slide-number").length ;i++){
+	document.getElementsByClassName("remark-slide-number")[i].hidden = false;
+	document.getElementsByClassName("remark-slide-number")[i].style.fontSize = "24px";
+}
+</script>
+  </body>
+</html>
