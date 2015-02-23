@@ -122,7 +122,7 @@ class: center, middle, gray
 
 # Sparse Matrix Computation in R with an Application to GEEs
 
-#### Lee S. McDaniel
+#### Lee S. McDaniel, Nicholas C. Henderson, Paul J. Rathouz
 
 #### LSUHSC - School of Public Health
 
@@ -203,39 +203,24 @@ class: gray, big
 
 ---
 
-class: gray, big
+class: gray
 
 # GEE Computation
 
-$$
-f( y\_{it} ) = \exp  \left\\{ y\_{it}  \theta\_{it}  - a ( \theta\_{it} ) + b(y\_{it}) \right\\},
-$$
-$$
-\theta\_{it} = h (\eta\_{it}), \mbox{ } \eta\_{it} = x\_{it} \beta
-$$
-
-Estimate $\beta$ by solving
+Estimate Coefficients by solving
 $$
 \sum\_{i=1}^{K} D\_i^T V\_i^{-1} S\_i = 0
 $$
 
-Using Newton Method
 $$
 \hat{\beta}\_{j+1} = \hat{\beta}\_{j} - \left\\{ \sum\_{i=1}^{K} D\_i^T V\_i^{-1} D\_i \right\\}^{-1} \left\\{ \sum\_{i=1}^{K} D\_i^T V\_i^{-1} S\_i \right\\}
 $$
 
----
-
-class: gray, big
-
-# GEE Computation
-
-* $D_i$ is diagonal ($n_i \times n_i$) <br><br>
+* $D_i$ is related to the design matrix ($n_i \times p$) <br><br>
 * $S_i$ is a vector ($n_i \times 1$) <br><br>
 * $V_i = A\_i^{1/2} R\_i(\alpha) A\_i^{1/2}$ <br><br>
 * $A\_i$ is diagonal ($n_i \times n_i$) <br><br>
 * $R\_i( \alpha)$ is a working correlation matrix ($n_i \times n_i$)
-
 ---
 
 class: gray, big
@@ -248,7 +233,7 @@ $$
 \hat{\beta}\_{j+1} = \hat{\beta}\_{j} - \left\\{  D^T V^{-1} D \right\\}^{-1} \left\\{  D^T V^{-1} S \right\\}
 $$
 
-* $D$ is diagonal  $\left( \sum_i n_i \times \sum_i n_i \right)$ <br><br>
+* $D$ is related to stacked design matrices $\left( \sum_i n_i \times p \right)$ <br><br>
 * $S$ is a vector $\left( \sum_i n_i \times 1 \right)$ <br><br>
 * $V$ is block diagonal $\left( \sum_i n_i \times \sum_i n_i \right)$
 
@@ -268,6 +253,12 @@ class: gray
 	  ..@ x       : num [1:5370] 1.364 -0.303 ...
 	  ..@ uplo    : chr "U"
 	  ..@ factors : list()
+
+---
+
+class: gray, big, center, middle
+
+Computing $0 \times 0$ takes just as long as $x \times y$
 
 ---
 
