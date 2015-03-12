@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+
+
+<html>
+<link rel="stylesheet" href="css/math.css" type="text/css" />
+
+<style type="text/css">
+
+      body {
+        font-family: 'Ariel' 'Baskerville' 'Droid Serif';
+        font-size: 24px;
+        color: #2e2e2e;
+		h1 {font-size:40px};
+
+      }
+      .gray {
+      	background: #2e2e2e;
+      	color: #FFFFFF;
+      }
+      
+      .image {
+      	background: #FFFFFF;
+      	color: #000000;
+		font-size: 18px;
+		h1 {font-size:1px;}
+      }
+      
+      .big{
+      	font-size: 28px;
+		h1 {font-size:40px};
+      }
+      
+      .small {
+      	font-size: 24px;
+		
+      }
+      .code {
+      	font-family:'Courier New';
+		margin-left: auto;
+		margin-right: auto;
+		font-size: 24px;
+		text-indent: 0px;
+		position:relative;
+		left:100px
+      }
+	  
+	  h1 {font-size:40px;}
+	  
+	  a:link {
+    	color: #FFFFFF;
+    	text-decoration:underline;
+	}
+	
+	
+	
+	
+	a.dark:link {color:#000000;text-decoration:underline;}
+	a.dark:visited {color:#000000;text-decoration:none;}
+
+/* visited link */
+	a:visited {
+    	color: #FFFFFF;
+	}
+	  
+	<!--
+	code { color: navy; background-color: transparent; }
+	div.codeblock { font-family: monospace;
+		font-size: medium;
+		color: navy; background-color: transparent;
+		white-space: pre; }
+
+	p.indent{ text-indent: 1cm; }
+	table.support { margin: auto; }
+	.support td, th { 
+		font-family: sans-serif; font-size: small; }
+	.support th { white-space: nowrap;  }
+	.support thead th { text-align: left;  }
+	table.support_legend { margin: auto; }
+	.support_legend td { vertical-align: top; }
+	.support_legend table th { 
+		font-family: sans-serif; font-size: small; }
+	table.browser_notes { margin: auto; }
+	table.browser_notes td, th { vertical-align: top; }
+	table.support td.perf { background-color: #99eeff; }
+	table.support td.good { background-color: #aaff99; }
+	table.support td.bad { background-color: #ff8888; }
+	table.support td.ugly { background-color: silver; }
+	table.support td.read { background-color: #ffffaa; }
+
+	/*** Math formatting test commands ***/
+	/***    fractions ***/
+	table.fractionborder { margin: auto; 
+		display: inline; vertical-align: -100%; }
+	.fractionborder td.numerator{ border-bottom: thin black solid; }
+	/***    fancy characters ***/
+	i.hbar{ position: relative; }
+	.hbar span{ position: absolute; left: 0; bottom: 0.65ex; }
+	i.overstrike{ position: relative; }
+	.overstrike span{ position: absolute; }
+	.overstrike sup{ position: absolute; }
+	.overstrike .up{ top: -0.2ex; left: 0; }
+	.overstrike .hi{ bottom: 0.8ex; left: 0.5ex; }
+
+	table.fraction-fallback { display: inline; }
+	table.fraction-fallback { display: inline-table; }
+	-->
+</style>
+
+
+  <head>
+    <title>Interpretation of PH Model</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      /* Slideshow styles */
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: gray, big	
+# Step 0: Univariate Analysis
+
+First, fit a PH model with each individual covariate in there, and check the partial LR test stat.  For anything significant at about the 20-25\% level, keep that covariate around.
+
+---
+class: gray, big
+# Step 1: Fit a Big Model
+
+All the covariates in step 0 should be put into a multivariate model for the survival time. 
+---
+class: gray, big
+# Step 2: Backward Selection
+
+Use the p-values from the Wald tests of the individual coefficients to identify covariates we might delete from the model.  Remove them one at a time, and do a likelihood ratio test for the two models.
+
+---
+class: gray, big
+# Step 3: Assess Change in Remaining Coefficients
+
+When we exclude a covariate, make sure it doesn't result in an important change in the coefficients of the variables remaining (~20% change)
+
+---
+class: gray, big
+# Step 4: Forward Selection
+
+Add back into the model, one at a time, all covariates eliminated in Step 0 and check their significance.  Keep significant ones, unless there is a compelling reason to do otherwise.  This gives the <i>preliminary main effects model</i>.
+---
+class: gray, big
+#Step 5: Scale of Continuous Covariates
+Examine the scale of the continuous covariates in the preliminary main effects model.  We want to see if the effect is linear in the log hazard and, if not, what transformation of the continuous covariate can make it linear in the log hazard. 
+
+---
+class: gray, big
+# Step 6: Interactions
+
+* Add clinically interesting interaction
+* Assess significance of other plausible interactions
+* Follow the hierarchical principle
+
+---
+class: gray, big
+# Step 7: Model Checking
+
+Do model checking
+
+
+   </textarea>
+    <script src="../js/remark-0.6.0.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+   <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="../js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+for (var i=0; i<document.getElementsByClassName("remark-slide-number").length ;i++){
+	document.getElementsByClassName("remark-slide-number")[i].hidden = false;
+	document.getElementsByClassName("remark-slide-number")[i].style.fontSize = "24px";
+}
+</script>
+  </body>
+</html>
